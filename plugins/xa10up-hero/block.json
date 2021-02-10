@@ -1,0 +1,15 @@
+{
+	"apiVersion": 2,
+	"name": "xa10up/hero",
+	"title": "XA10up Hero",
+	"category": "xa10up",
+	"icon": "smiley",
+	"description": "A short topic with subitems",
+	"textdomain": "xa10up-hero",
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

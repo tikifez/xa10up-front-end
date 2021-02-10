@@ -1,0 +1,243 @@
+/**
+ * This needs to be migrated to the wordpress block but is temporarily here for speed
+ */
+@use 'shared/colors';
+@use 'shared/type';
+@use 'shared/breakpoints';
+@use 'shared/metrics';
+
+/**
+ * Base styles
+ */
+.wp-block-xa10up-hero {
+
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  padding-bottom: var(--global-gutter-double-and-quarter);
+  padding-top: var(--global-gutter-double-and-quarter);
+
+  @media screen and (max-width: breakpoints.$extra-wide) {
+    flex-direction: column;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .wp-block-columns {
+    margin: var(--global-gutter-and-half) 0 0;
+  }
+
+  .wp-block-xa10up-hero__content-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .wp-block-xa10up-hero__content {
+    max-width: var(--module-content-width);
+    padding: 0 metrics.safe-area-right() 0 metrics.safe-area-left();
+    @media screen and (max-width: breakpoints.$extra-wide) {
+      margin: 0 auto;
+
+    }
+
+    @media screen and (min-width: breakpoints.$extra-wide) {
+      margin: 0 var(--global-gutter-and-half) 0 var(--global-gutter-and-half);
+    }
+  }
+
+
+}
+
+.wp-block-xa10up-hero__eyebrow {
+  @include type.overline;
+  color: var(--accent-color);
+}
+
+.wp-block-xa10up-hero__media {
+
+  img {
+    height: 100%;
+    object-fit: contain;
+    @media screen and (max-width: breakpoints.$extra-wide) {
+      max-height: 416px;
+    }
+  }
+}
+
+
+/**
+ * Content left variant (default)
+ */
+.wp-block-xa10up-hero:not(.is-style-right):not(.is-style-center) {
+
+
+  @media screen and (max-width: breakpoints.$wide) {
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: breakpoints.$extra-wide) {
+    flex-direction: row-reverse;
+  }
+
+  .wp-block-xa10up-hero__content {
+
+    @media screen and (min-width: breakpoints.$extra-wide) {
+      flex: 1 1 var(--module-content-width);
+    }
+  }
+}
+
+/**
+ * Content right variant
+ */
+.wp-block-xa10up-hero.is-style-right {
+  align-items: center;
+
+  .wp-block-xa10up-hero__media {
+    @media screen and (min-width: breakpoints.$extra-wide) {
+      margin-left: var(--global-gutter-and-half);
+    }
+  }
+
+  .wp-block-xa10up-hero__content {
+    @media screen and (min-width: breakpoints.$extra-wide) {
+      margin-left: var(--global-gutter-double-and-quarter);
+    }
+  }
+}
+
+/**
+ * Center content variant
+ */
+.wp-block-xa10up-hero.is-style-center {
+  justify-content: center;
+
+  .wp-block-xa10up-hero__content {
+    text-align: center;
+    margin-left: var(--global-gutter-and-half);
+    margin-right: var(--global-gutter-and-half);
+  }
+}
+
+
+/**
+ * Media background variant
+ */
+.wp-block-xa10up-hero.is-media-background {
+  .wp-block-xa10up-hero__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+
+    &::after {
+      content: '';
+      background: rgba(colors.$gradient-dark-end, 0.6);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .wp-block-xa10up-hero__content {
+    z-index: 1;
+  }
+
+}
+
+// theme default
+.wp-block-xa10up-hero:not(.is-dark) {
+  color: var(--background);
+  background: var(--background-color);
+}
+
+// theme is dark
+.wp-block-xa10up-hero.is-dark {
+  .wp-block-xa10up-hero__eyebrow {
+    color: var(--thm-dark-accent-color);
+  }
+}
+
+/**
+ * Variant for Engage Brand hero
+ */
+
+.wp-block-xa10up-hero.is-hero-engage-brand {
+  $media-height: 400px;
+  $media-offset: 50px;
+
+  color: var(--thm-dark-text-color);
+  background: linear-gradient(135deg, #{colors.$gradient-dark-start} 0%, #{colors.$gradient-dark-end} 100%);
+  height: var(--module-height);
+  padding-top: 0;
+
+  @media screen and (max-width: breakpoints.$extra-wide) {
+    padding-top: 0;
+  }
+
+  h2 {
+    @include type.heading-1;
+  }
+
+  .wp-block-xa10up-hero__media {
+    overflow: hidden;
+    position: relative;
+
+    @media screen and (max-width: breakpoints.$extra-wide) {
+      height: $media-height - $media-offset;
+      text-align: center;
+      margin-bottom: var(--global-gutter);
+
+    }
+    @media screen and (min-width: breakpoints.$extra-wide) {
+      height: var(--module-height);
+    }
+
+
+    img {
+
+      object-fit: initial;
+
+      @media screen and (max-width: breakpoints.$extra-wide) {
+        height: $media-height + $media-offset;
+        width: auto;
+      }
+
+      @media screen and (min-width: breakpoints.$extra-wide) {
+        height: calc(var(--module-height) + #{$media-offset});
+
+      }
+
+      @media screen and (max-width: breakpoints.$extra-wide) {
+        height: $media-height;
+      }
+
+      @media screen and (min-width: breakpoints.$extra-wide) {
+        height: calc(var(--module-height) + var(--header-height));
+      }
+    }
+
+  }
+
+  .wp-block-xa10up-hero__content {
+    @media screen and (min-width: breakpoints.$extra-wide) {
+      padding-top: var(--header-height);
+    }
+  }
+}

@@ -1,0 +1,172 @@
+@use 'shared/type';
+
+/**
+ * Primary navigation
+ */
+
+$durationContent: 200ms; // Reflected in nav-control.js.
+$durationToggle: 200ms; // Reflected in nav-control.js.
+
+.nav-wrapper {
+  position: absolute;
+  right: 0;
+  top: calc(var(--header-gutter-top) + var(--global-gutter) * -1);
+}
+
+.nav-primary {
+  @include type.marginal-1;
+  padding: var(--global-gutter);
+
+  .nav-content {
+    display: none;
+    opacity: 0;
+    width: 200px;
+    padding: var(--global-gutter-and-half) var(--global-gutter) var(--global-gutter);
+    //margin-top: calc(var(--global-gutter) * 2 * -1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background: black;
+    color: white;
+    transition: opacity $durationContent ease-in;
+
+    a {
+      &:link, &:visited {
+        text-decoration: none;
+        color: currentColor;
+      }
+
+      &:active {
+
+      }
+
+      &:hover {
+
+      }
+
+    }
+  }
+
+  .nav-toggle {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    border-style: none;
+    cursor: pointer;
+    padding: 0.25em 0.3em;
+    margin-left: auto;
+    z-index: 0;
+    height: 32px;
+    width: 32px;
+    position: relative;
+
+    .ends::before,
+    .ends::after,
+    .middle {
+      height: 4px;
+      content: '';
+      background: white;
+      position: absolute;
+      left: 0;
+      border-radius: 2px;
+      transition: border-radius $durationToggle ease-in,
+      opacity $durationToggle ease-in,
+      transform $durationToggle ease-in,
+      height $durationToggle ease-in,
+      width $durationToggle ease-in,
+      top $durationToggle ease-in,
+      bottom $durationToggle ease-in,
+      left $durationToggle ease-in;
+    }
+
+    .ends,
+    .middle {
+      position: absolute;
+      left: 0;
+    }
+
+    .ends {
+      height: 32px;
+
+      &::before,
+      &::after {
+        width: 24px;
+      }
+
+      &::before {
+        top: 2px;
+      }
+
+      &::after {
+        top: 26px;
+      }
+    }
+
+    .middle {
+      width: 32px;
+      height: 4px;
+    }
+
+
+  }
+
+  .menu {
+    padding: 0;
+
+    li {
+      list-style-type: none;
+    }
+
+    li + li {
+      margin-top: var(--global-gutter-and-quarter);
+    }
+  }
+}
+
+/**
+ * Active state
+ */
+.nav-primary.is-active {
+
+  .nav-content {
+    opacity: 1;
+  }
+
+
+  .nav-toggle {
+    // TODO: Animation could be smoothed out with keyframes.
+    .ends::before,
+    .ends::after,
+    .middle {
+      border-radius: 0;
+    }
+
+    .middle {
+      opacity: 0;
+      width: 0;
+      transform-origin: center;
+      left: 16px;
+    }
+
+    .ends {
+      left: -2px;
+
+      &::before, &::after {
+        height: 8px;
+        left: calc(50% - 2px);
+        width: 40px;
+        top: 12px;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+}

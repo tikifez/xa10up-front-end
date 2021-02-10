@@ -1,0 +1,107 @@
+@use 'shared/breakpoints';
+
+/**
+  * Typography is also usually defined in a shared file or sometimes a javascript resource to be loaded in with webpack.
+  * I like to organise them in the sorts of jobs they fill which can then be added to classes as necessary. I first
+  * tried it out after reading [Flexible Typesetting](https://abookapart.com/products/flexible-typesetting) by Tim
+  * Brown.
+  *
+  * I like to operate from a [modular scale](https://www.modularscale.com) when I can.
+ */
+
+// for readability i like to set these in variables
+$regular: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+
+@mixin versatile-font() {
+  font-family: 'Montserrat', sans-serif;
+}
+
+@mixin impactful-font() {
+  font-family: 'Montserrat', sans-serif;
+}
+
+@mixin monospace-font {
+  font-family: 'Cousine', monospace;
+}
+
+/**
+ * Typography
+ */
+@mixin heading-1() {
+  @include impactful-font;
+  @media screen and (max-width: breakpoints.$extra-wide) {
+
+    font-size: 2.6rem;
+    font-weight: $bold;
+    line-height: 1.16;
+    margin-bottom: 32px;
+  }
+  @media screen and (min-width: breakpoints.$extra-wide) {
+    font-size: 4rem;
+    font-weight: $bold;
+    line-height: 1.16;
+    margin-bottom: 32px;
+  }
+}
+
+@mixin heading-2() {
+  @include impactful-font;
+  @media screen and (max-width: breakpoints.$extra-wide) {
+    font-size: 2.55rem;
+    font-weight: $bold;
+    line-height: 1.16;
+    margin: 16px 0 32px
+  }
+  @media screen and (min-width: breakpoints.$extra-wide) {
+    font-size: 3rem;
+    font-weight: $bold;
+    line-height: 1.16;
+    margin: 16px 0 32px;
+  }
+}
+
+@mixin body-1() {
+  @include versatile-font;
+  @media screen and (max-width: breakpoints.$extra-wide) {
+    font-size: 1rem;
+    font-weight: $medium;
+    line-height: 1.6;
+    letter-spacing: 0.025em;
+  }
+  @media screen and (min-width: breakpoints.$extra-wide) {
+    font-size: 1.25rem;
+    font-weight: $medium;
+    line-height: 1.6;
+    letter-spacing: 0.025em;
+  }
+}
+
+@mixin overline {
+  @include monospace-font;
+
+  @media screen and (max-width: breakpoints.$extra-wide) {
+    font-size: 1rem;
+    font-weight: $bold;
+    line-height: 1;
+  }
+  @media screen and (min-width: breakpoints.$extra-wide) {
+    font-size: 1.25rem;
+    font-weight: $bold;
+    line-height: 1;
+  }
+}
+
+@mixin button-1() {
+  @include versatile-font;
+  font-size: 1.25rem;
+  font-weight: $medium;
+}
+
+@mixin marginal-1() {
+  @include versatile-font;
+  font-size: 1.75rem;
+  font-weight: $bold;
+}

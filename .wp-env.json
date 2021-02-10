@@ -1,0 +1,9 @@
+{
+  "core": "WordPress/WordPress",
+  "plugins": [
+    "./plugins/xa10up-hero"
+  ],
+  "themes": [
+    "./themes/xa-10up"
+  ]
+}

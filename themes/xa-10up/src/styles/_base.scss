@@ -1,0 +1,88 @@
+@use 'shared/colors';
+@use 'shared/type';
+@use 'shared/breakpoints';
+@use 'shared/metrics';
+
+/**
+ * Base
+ */
+:root {
+  --text-color: #{colors.$text-color};
+  --background-color: white;
+  --accent-color: #{colors.$blue};
+  --thm-dark-text-color: white;
+  --thm-dark-background-color: #{colors.$gradient-dark-start};
+  --thm-dark-accent-color: #{colors.$green};
+  --content-constrain-width: 1488px;
+  --global-gutter: 32px;
+  --global-gutter-and-quarter: 40px;
+  --global-gutter-and-half: 48px;
+  --global-gutter-double: 64px;
+  --global-gutter-double-and-quarter: 72px;
+  --header-height: 192px;
+  --header-logo-height: 40px;
+  --footer-height: 126px;
+
+
+  @media screen and (max-width: breakpoints.$extra-wide) {;
+    --header-gutter-top: 24px;
+    --module-height: 848px;
+    --module-content-width: auto;
+  }
+  @media screen and (min-width: breakpoints.$extra-wide) {
+    --header-gutter-top: 64px;
+    --module-height: 848px;
+    --module-content-width: 31.5rem;
+  }
+  @media screen and (min-width: breakpoints.$ultra-wide) {
+
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include type.versatile-font;
+  @include type.body-1;
+
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include type.impactful-font;
+}
+
+h2 {
+  @include type.heading-2;
+}
+
+.eyebrow {
+  @include type.overline;
+}
+
+a {
+  transition: color 150ms ease-in;
+  &:hover, &:active, &:focus {
+    color: var(--accent-color)
+  }
+}
+
+.is-dark {
+  color: var(--thm-dark-text-color);
+  background: var(--thm-dark-background-color);
+
+  a {
+    &:hover, &:active, &:focus {
+      color: var(--thm-dark-accent-color)
+    }
+  }
+}
